@@ -1,6 +1,7 @@
 package net.cone.webapp.controller;
 
 import net.cone.backendapp.dao.CategoryDAO;
+import net.cone.backendapp.dto.Categoria;
 import net.cone.backendapp.dto.Category;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class PageController {
 		mv.addObject("title", "Home");
 		
 		//passing the list of categories
-		mv.addObject("categories", categoryDAO.list());
+		mv.addObject("categorias", categoryDAO.list());
 		
 		mv.addObject("userClickHome", "true");
 		return mv;
@@ -54,7 +55,7 @@ public class PageController {
 		mv.addObject("title", "All Products");
 		
 		//passing the list of categories
-		mv.addObject("categories", categoryDAO.list());
+		mv.addObject("categorias", categoryDAO.list());
 		
 		mv.addObject("userClickAllProducts", "true");
 		return mv; 
@@ -65,16 +66,16 @@ public class PageController {
 		ModelAndView mv = new ModelAndView("page");
 		
 		//categoryDAO to fetch a single category
-		Category category = null;
-		category = categoryDAO.get(id);
+		Categoria categoria = null;
+		categoria = categoryDAO.get(id);
 		
-		mv.addObject("title", category.getName());
+		mv.addObject("title", categoria.getNombre());
 		
 		//passing the list of categories
-		mv.addObject("categories", categoryDAO.list());
+		mv.addObject("categorias", categoryDAO.list());
 		
 		//passing the single category object
-		mv.addObject("category", category);
+		mv.addObject("categoria", categoria);
 		
 		mv.addObject("userClickCategoryProducts", "true");
 		return mv; 

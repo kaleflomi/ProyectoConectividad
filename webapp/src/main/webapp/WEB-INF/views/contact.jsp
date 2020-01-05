@@ -2,9 +2,9 @@
 
 	<div class="row">	
 		
-		<h1>Contact Us</h1>
+		<h1>Contacto</h1>
 		<hr/>
-		<p>This is an contact us page</p>	
+		<p>Esta página es de contacto</p>	
 	
 	</div>
 

@@ -3,10 +3,14 @@ package net.cone.backendapp.daoimpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import net.cone.backendapp.config.ConnectionConfig;
 import net.cone.backendapp.dao.CategoryDAO;
 import net.cone.backendapp.dto.Category;
+import net.cone.backendapp.dto.Categoria;
 
 @Repository("categoryDAO")
 public class CategoryDAOImpl implements CategoryDAO {
@@ -43,16 +47,24 @@ public class CategoryDAOImpl implements CategoryDAO {
 	}
 	
 	@Override
-	public List<Category> list() {
+	public List<Categoria> list() {
 		// TODO Auto-generated method stub
-		return categories;
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(ConnectionConfig.getDataSource());
+		List<Categoria> datos = jdbcTemplate.query("select * from categoria", new BeanPropertyRowMapper<Categoria>(Categoria.class));
+		return datos;
 	}
 
 	@Override
-	public Category get(int id) {
-		for(Category category : categories){
+	public Categoria get(int id) {
+		/*for(Category category : categories){
 			if(category.getId()==id)
 				return category;
+		}*/
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(ConnectionConfig.getDataSource());
+		List<Categoria> datos = jdbcTemplate.query("select * from categoria", new BeanPropertyRowMapper<Categoria>(Categoria.class));
+		for(Categoria cat : datos){
+			if(cat.getId()==id)
+				return cat;
 		}
 		return null;
 	}
